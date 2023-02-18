@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopapirollo</title>
+</head>
+
+<body style="background-image: url(hatter.jpg);background-size: cover;">
+    <table style=" display: inline-flex; margin-top: auto; margin-right:auto;">
+        <tr>
+            <td
+                style=" font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:blueviolet;">
+
+
+                Nyert(<ins id="nyert" style="text-decoration: none;"></ins>)
+            </td>
+        </tr>
+        <tr >
+            <td
+                style=" font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:blueviolet;">
+
+                Döntetlen(<ins id="dontetlen" style="text-decoration: none;"></ins>)
+            </td>
+        </tr>
+        <tr >
+            <td
+                style=" font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:blueviolet;">
+
+                Vesztett(<ins id="vesztett" style="text-decoration: none;"></ins>)
+            </td>
+        </tr>
+    </table>    
+    <table style="margin-left:auto;  margin-right:auto;text-align: center;padding-top:20px ; height: 100px;">
+        <tr style="text-align: center;">
+            
+            <td id="outcome"
+                style="text-align: center; font-size: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:blueviolet;">
+            </td>
+        </tr>
+    </table>
+    <table style="text-align: center;" >
+        <tr>
+            <td>
+                <img src="ko.png" style="width: 15%;" onclick="funny(0)"> 
+                <img src="paper.png" style="width: 15%;" onclick="funny(2)">
+                <img src="ollo.png" style=" width: 15%;" onclick="funny(1)">
+            </td>
+        </tr>
+    </table>
+    <table id="myTable" style="text-align: center; margin-left: auto; margin-right: auto;">
+        
+        <tr style="height: 250px">
+            
+
+        </tr>
+        <tr>
+            
+            <td><button style="margin-left: auto; margin-right: auto; background-color: blueviolet; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;" onclick="del()">Újra!</button></td>
+        </tr>
+    </table>
+    <script>
+        var gg = false;
+        var rpick;
+        var ypick;
+        var ny = 0;
+        var d = 0;
+        var v = 0;
+        var firstRow = document.getElementById("myTable").rows[0];
+        document.getElementById("dontetlen").innerHTML = d;
+        document.getElementById("vesztett").innerHTML = v;
+        document.getElementById("nyert").innerHTML = ny;
+        function displayImage(src) {
+            var img = document.createElement("img");
+            var x = firstRow.insertCell(-1);
+            img.style = "width: 30%;";
+            img.src = src;
+            img.id = "cc";
+            x.appendChild(img);
+        }
+        function lol() {
+            var x = Math.floor(Math.random() * 3);
+            if (x == 0) {
+                displayImage('ko.png');
+                rpick = 0;
+            }
+            if (x == 1) {
+                displayImage('ollo.png');
+                rpick = 1;
+            }
+            if (x == 2) {
+                displayImage('paper.png');
+                rpick = 2;
+            }
+            gg = true;
+        }
+        function funny(ypick) {
+            if (gg == false) {
+                lol();
+                if (rpick == ypick) {
+                    document.getElementById("outcome").innerHTML = "Döntetlen :|";
+                    d = d + 1;
+                    document.getElementById("dontetlen").innerHTML = d;
+                }
+                if (rpick == 0 && ypick == 1) {
+                    document.getElementById("outcome").innerHTML = "Vesztettél :(";
+                    v = v + 1;
+                    document.getElementById("vesztett").innerHTML = v;
+                }
+                if (rpick == 0 && ypick == 2) {
+                    document.getElementById("outcome").innerHTML = "Nyertél :)";
+                    ny = ny + 1;
+                    document.getElementById("nyert").innerHTML = ny;
+                }
+                if (rpick == 1 && ypick == 0) {
+                    document.getElementById("outcome").innerHTML = "Nyertél :)";
+                    ny = ny + 1;
+                    document.getElementById("nyert").innerHTML = ny;
+                }
+                if (rpick == 1 && ypick == 2) {
+                    document.getElementById("outcome").innerHTML = "Vesztettél :(";
+                    v = v + 1;
+                    document.getElementById("vesztett").innerHTML = v;
+                }
+                if (rpick == 2 && ypick == 1) {
+                    document.getElementById("outcome").innerHTML = "Nyertél :)";
+                    ny = ny + 1;
+                    document.getElementById("nyert").innerHTML = ny;
+                }
+                if (rpick == 2 && ypick == 0) {
+                    document.getElementById("outcome").innerHTML = "Vesztettél :(";
+                    v = v + 1;
+                    document.getElementById("vesztett").innerHTML = v;
+                }
+            }
+
+        }
+        function del() {
+            document.getElementById("outcome").innerHTML = "";
+            document.getElementById("cc").remove();
+            firstRow.deleteCell(0);
+            gg = false;
+            ypick = 0;
+        }
+
+    </script>
+</body>
+
+</html>
